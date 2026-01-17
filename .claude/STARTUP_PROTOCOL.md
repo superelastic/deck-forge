@@ -26,7 +26,23 @@ Read `scratchpad.md` for:
 - Reminders
 - Blocked items
 
-### 3. Restore Context for User
+### 3. Check for Orphaned Decks
+
+Look for deck folders left in the project root from previous sessions:
+
+```bash
+# Find directories containing deck.md files (likely orphaned decks)
+find . -maxdepth 2 -name "deck.md" -not -path "./templates/*" -not -path "./examples/*" 2>/dev/null
+```
+
+If orphaned decks are found:
+- Alert the user: "Found deck folder(s) from a previous session: [folder names]"
+- Ask if they should be moved to `~/presentations/` or deleted
+- Clean up before starting new work
+
+**Why this matters:** Deck Forge is a tool, not a collection. Finished decks belong in `~/presentations/`. Session memory captures prompts, so decks can be recreated if needed.
+
+### 4. Restore Context for User
 
 Provide a brief summary:
 - Last session's focus
@@ -46,7 +62,7 @@ Provide a brief summary:
  Ready to continue on rate limiter implementation?"
 ```
 
-### 4. If User References Past Work
+### 5. If User References Past Work
 
 When user says things like:
 - "How did we handle X before?"
@@ -64,7 +80,7 @@ rg -l "search_term" docs/investigations/
 python scripts/semantic_filter.py "user's question"
 ```
 
-### 5. Provide Relevant Context
+### 6. Provide Relevant Context
 
 If past work is found:
 - Summarize the key findings

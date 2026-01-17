@@ -63,13 +63,21 @@ Before completing any deck, run through `agent_docs/quality-checklist.md`.
 
 ### File Organization
 
-New decks go in their own folder:
+**During creation**, decks go in a folder at project root:
 ```
-my-presentation/
-  deck.md          # Content
-  img/             # Images
-  output/          # Build outputs
+deck-forge/
+  my-presentation/
+    deck.md          # Content
+    img/             # Images
+    output/          # Build outputs
 ```
+
+**After delivery**, move finished decks to `~/presentations/`:
+```bash
+mv my-presentation ~/presentations/
+```
+
+This keeps Deck Forge clean as a tool. Session memory captures prompts, so any deck can be recreated by re-prompting with the original source material.
 
 ## Collaboration Mode
 
