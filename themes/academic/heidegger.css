@@ -1,0 +1,322 @@
+/* @theme heidegger */
+
+/*
+ * Heidegger Theme for Marp
+ * Elegant, academic - suitable for research and scholarly presentations
+ * Named for Martin Heidegger
+ */
+
+@import 'default';
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+
+:root {
+  --color-bg: #fffef9;
+  --color-fg: #2c2c2c;
+  --color-accent: #8b0000;
+  --color-accent-light: #fef2f2;
+  --color-muted: #666666;
+  --color-border: #e0ddd5;
+  --font-family-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-family-sans: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: 'Source Code Pro', monospace;
+}
+
+section {
+  font-family: var(--font-family-serif);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+  padding: 50px 70px;
+  line-height: 1.7;
+}
+
+/* Headers */
+h1 {
+  font-family: var(--font-family-sans);
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--color-fg);
+  margin-bottom: 28px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-family: var(--font-family-sans);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: var(--font-family-sans);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--color-muted);
+  margin-bottom: 16px;
+}
+
+/* Title slide */
+section.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-top: 8px solid var(--color-accent);
+}
+
+section.title h1 {
+  font-family: var(--font-family-serif);
+  font-size: 48px;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+section.title h2 {
+  font-family: var(--font-family-sans);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--color-muted);
+  font-style: normal;
+}
+
+/* Transition slides */
+section.transition,
+section.lead {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+section.transition h1,
+section.lead h1 {
+  color: var(--color-bg);
+  font-family: var(--font-family-serif);
+  font-style: italic;
+  font-size: 44px;
+}
+
+/* Lists */
+ul, ol {
+  margin-left: 0;
+  padding-left: 1.2em;
+}
+
+li {
+  margin-bottom: 0.7em;
+  padding: 4px 8px;
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+li:hover {
+  background-color: var(--color-accent-light);
+}
+
+li::marker {
+  color: var(--color-accent);
+}
+
+/* Emphasis */
+strong {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+em {
+  font-style: italic;
+}
+
+/* Code */
+code {
+  font-family: var(--font-family-mono);
+  background-color: #f5f4ef;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.85em;
+  color: var(--color-fg);
+}
+
+pre {
+  background-color: #2c2c2c;
+  color: #f5f4ef;
+  padding: 20px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 18px;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 24px;
+  font-family: var(--font-family-sans);
+}
+
+th {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 500;
+  text-align: left;
+  padding: 14px 18px;
+}
+
+td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+tr:hover {
+  background-color: var(--color-accent-light);
+}
+
+/* Blockquotes - important for academic presentations */
+blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 28px;
+  margin: 28px 0;
+  color: var(--color-muted);
+  font-style: italic;
+  font-size: 26px;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 12px;
+  font-size: 20px;
+  font-style: normal;
+  color: var(--color-fg);
+}
+
+blockquote cite::before {
+  content: '— ';
+}
+
+/* Links */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+/* Header and footer */
+header {
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  color: var(--color-muted);
+}
+
+footer {
+  font-family: var(--font-family-sans);
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+/* Page number */
+section::after {
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  color: var(--color-muted);
+}
+
+/* Two-column layout */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+}
+
+/* Footnotes */
+.footnote {
+  font-size: 18px;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+/* Citation styling */
+.citation {
+  font-family: var(--font-family-sans);
+  font-size: 18px;
+  color: var(--color-muted);
+}
+
+/* Small text variant */
+section.small {
+  font-size: 22px;
+}
+
+section.small h1 {
+  font-size: 34px;
+}
+
+/* Large text variant */
+section.large {
+  font-size: 34px;
+}
+
+section.large h1 {
+  font-size: 52px;
+}
+
+/* Dark variant for evening presentations */
+section.dark {
+  background-color: #1a1a1a;
+  color: #e8e6e0;
+}
+
+section.dark h1,
+section.dark h2 {
+  color: #e8e6e0;
+}
+
+section.dark h2 {
+  color: #d4a5a5;
+}
+
+section.dark strong {
+  color: #d4a5a5;
+}
+
+section.dark code {
+  background-color: #2a2a2a;
+}
+
+section.dark blockquote {
+  border-left-color: #d4a5a5;
+  color: #999;
+}
+
+section.dark th {
+  background-color: #d4a5a5;
+  color: #1a1a1a;
+}

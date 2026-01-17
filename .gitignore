@@ -1,0 +1,18 @@
+# Build outputs
+output/
+*.html
+*.pdf
+*.pptx
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*~
+.vscode/
+.idea/
+
+# Node (if using marp-cli locally)
+node_modules/
