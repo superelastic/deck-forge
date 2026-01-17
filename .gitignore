@@ -16,3 +16,7 @@ Thumbs.db
 
 # Node (if using marp-cli locally)
 node_modules/
+
+# Session memory
+.session_logs/**/*.jsonl
+.claude/settings.local.json

@@ -77,3 +77,11 @@ my-presentation/
 2. **Iterate content** - Fill in sections, checking against principles
 3. **Refine design** - Adjust theme, visuals, spacing
 4. **Polish** - Speaker notes, transitions, final checklist review
+
+## Session Memory
+
+This project uses session memory for continuity between conversations.
+
+- **At session start**: Read `.claude/STARTUP_PROTOCOL.md` for context from previous sessions
+- **At session end**: Run `./scripts/archive-session.sh` to save the session
+- **Search past work**: `rg -l "term" .session_logs/`
