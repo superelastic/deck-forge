@@ -169,30 +169,51 @@ pre .comment { color: #8b949e; }
 pre .function { color: #d2a8ff; }
 pre .number { color: #79c0ff; }
 
-/* Tables */
-table {
+/* Tables - using high specificity to override Marp defaults */
+section table {
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 22px;
 }
 
-th {
-  background-color: var(--color-bg-alt);
-  color: var(--color-accent);
-  font-weight: 500;
+section table thead tr th {
+  background-color: var(--color-bg-alt) !important;
+  color: var(--color-accent) !important;
+  font-weight: 600;
   text-align: left;
   padding: 12px 16px;
   border-bottom: 2px solid var(--color-accent);
 }
 
-td {
+section table tbody tr td {
   padding: 12px 16px;
   border-bottom: 1px solid var(--color-border);
+  color: #ffffff !important;
+  background-color: transparent;
 }
 
-tr:hover {
-  background-color: var(--color-bg-alt);
+/* Alternating row backgrounds */
+section table tbody tr:nth-child(even) td {
+  background-color: rgba(30, 41, 59, 0.7) !important;
+  color: #ffffff !important;
+}
+
+section table tbody tr:nth-child(odd) td {
+  background-color: rgba(15, 23, 42, 0.5) !important;
+  color: #ffffff !important;
+}
+
+/* Ensure strong/bold text in tables is accent colored */
+section table td strong {
+  color: var(--color-accent) !important;
+  font-weight: 600;
+}
+
+/* Also handle markdown bold syntax ** */
+section table td b {
+  color: var(--color-accent) !important;
+  font-weight: 600;
 }
 
 /* Blockquotes */
