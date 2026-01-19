@@ -7,6 +7,22 @@ cd "$CLAUDE_PROJECT_DIR" 2>/dev/null || cd "$(dirname "$0")/../.."
 echo "=== SESSION CONTEXT ==="
 echo ""
 
+# Check for orphaned deck folders from previous sessions
+ORPHANED_DECKS=$(find . -maxdepth 2 -name "deck.md" -not -path "./templates/*" -not -path "./examples/*" 2>/dev/null)
+if [ -n "$ORPHANED_DECKS" ]; then
+    echo "## ⚠️  Orphaned Decks Found"
+    echo ""
+    echo "The following deck folders were left from previous sessions:"
+    echo ""
+    for deck in $ORPHANED_DECKS; do
+        folder=$(dirname "$deck")
+        echo "  - $folder"
+    done
+    echo ""
+    echo "Consider moving to ~/presentations/ or deleting if no longer needed."
+    echo ""
+fi
+
 # Show scratchpad (current work and TODOs)
 if [ -f "scratchpad.md" ]; then
     echo "## Scratchpad"

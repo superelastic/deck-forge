@@ -19,6 +19,7 @@ node_modules/
 
 # Python virtual environment
 .venv/
+__pycache__/
 
 # Session memory
 .session_logs/**/*.jsonl
