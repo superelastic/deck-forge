@@ -17,6 +17,10 @@ Thumbs.db
 # Node (if using marp-cli locally)
 node_modules/
 
+# Python virtual environment
+.venv/
+
 # Session memory
 .session_logs/**/*.jsonl
+.session_logs/.vector_index/
 .claude/settings.local.json

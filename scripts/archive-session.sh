@@ -97,6 +97,11 @@ for session in "$CLAUDE_SESSION_DIR"/*.jsonl; do
   git add "$TARGET_MD" 2>/dev/null || true
 done
 
+# Re-index sessions for semantic search
+if [ -f "scripts/index_sessions.py" ]; then
+  python3 scripts/index_sessions.py 2>/dev/null || true
+fi
+
 echo ""
 if [ $ARCHIVED_COUNT -eq 0 ]; then
   echo "No new sessions to archive ($SKIPPED_COUNT already archived or empty)"
