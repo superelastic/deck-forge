@@ -33,7 +33,7 @@ section {
   font-weight: 400;
   color: var(--color-fg);
   background-color: var(--color-bg);
-  padding: 40px 60px;
+  padding: 40px 60px 80px 60px;  /* Extra bottom padding to clear page numbers */
   line-height: 1.6;
 }
 
