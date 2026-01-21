@@ -26,6 +26,10 @@ Before finalizing any deck, work through this checklist. Items marked with a tes
 - [ ] **Figures are simplified** — highlight 1-2 key data points, not everything
   - *Test*: Readable from back of room? If not, it's a handout, not a slide.
 - [ ] **Consistent visual language** — same colors/styles mean same things throughout
+- [ ] **Right tool for visualization** — Mermaid for flows, Matplotlib for data plots
+  - *Test*: Does the diagram type match the content type? (See `agent_docs/diagrams-and-charts.md`)
+- [ ] **Charts are slide-optimized** — large fonts, minimal gridlines, 2-3 data series max
+  - *Test*: Can you understand the chart's message in 3 seconds?
 
 ## Content Balance
 
@@ -54,6 +58,8 @@ Before finalizing any deck, work through this checklist. Items marked with a tes
 - [ ] Slide separators (`---`) correctly placed
 - [ ] Images sized appropriately (`![width:Npx]` or `![bg]`)
 - [ ] Multi-column layouts render correctly
+- [ ] Mermaid diagrams render (test in preview before export)
+- [ ] SVG charts generated and committed to `img/`
 
 ## Final Sanity
 

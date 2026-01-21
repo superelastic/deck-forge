@@ -25,6 +25,7 @@ scripts/
 
 agent_docs/        # Detailed references
   marp-syntax.md   # Marp formatting reference
+  diagrams-and-charts.md  # Visualization tools (Mermaid, Matplotlib)
   quality-checklist.md
   slide-creation-rules.md
 ```
@@ -56,6 +57,19 @@ agent_docs/        # Detailed references
 ./scripts/build.sh pptx deck.md      # Export PowerPoint
 ./scripts/build.sh all deck.md       # Export all formats
 ```
+
+### Diagrams and Charts
+
+Use the right tool for each visualization type:
+
+| Type | Tool | Notes |
+|------|------|-------|
+| Flowcharts, sequences, state diagrams | Mermaid | Inline in markdown, no build step |
+| Data plots (X-Y, bar, pie) | Matplotlib → SVG | Generate to `img/`, include as image |
+
+For data-driven charts, create a Python script in `img/generate_charts.py` and run before building.
+
+See `agent_docs/diagrams-and-charts.md` for syntax, examples, and styling guidance.
 
 ### Verification
 
