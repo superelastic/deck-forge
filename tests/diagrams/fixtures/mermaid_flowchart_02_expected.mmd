@@ -1,0 +1,16 @@
+flowchart TB
+    A[Purchase Request] --> B{Amount?}
+    B -->|Under $1K| C[Auto-Approve]
+    B -->|$1K-$10K| D{Manager Approval}
+    B -->|Over $10K| E{VP Approval}
+
+    D -->|Approved| F[Procurement]
+    D -->|Rejected| G[Return to Requester]
+
+    E -->|Approved| H{Finance Review}
+    E -->|Rejected| G
+
+    H -->|Approved| F
+    H -->|Rejected| G
+
+    C --> F

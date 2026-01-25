@@ -16,6 +16,32 @@ Visual representations should clarify, not impress. Choose the right tool for ea
 
 **The test**: Is there a simpler tool that would work? Use the lightest tool that accurately represents the content.
 
+## When to Visualize
+
+Use these heuristics during deck creation to identify text that benefits from visual representation.
+
+### Text Patterns That Signal Visualization
+
+| Text Pattern | Visualization | Example Trigger |
+|--------------|---------------|-----------------|
+| Sequential steps (3+) | Flowchart | "First... then... finally..." |
+| Decision with branches | Flowchart with diamond | "If X, do Y; otherwise Z" |
+| Actor interactions | Sequence diagram | "User sends request to server..." |
+| State transitions | State diagram | "Moves from idle to active when..." |
+| Quantity comparisons | Bar chart | "A has 40%, B has 25%, C has 35%" |
+| Trend over time | Line chart | "Revenue grew from 10M to 50M over 5 years" |
+| Part-of-whole | Pie chart | "Budget breakdown: 60% salaries, 25% operations..." |
+| Hierarchical structure | Mind map / tree | "Main topic with three subtopics..." |
+
+### When NOT to Visualize
+
+- **Simple lists** — bullets suffice when items are independent
+- **Single comparisons** — words are clearer: "A is twice B"
+- **Abstract concepts** — without clear structure, visuals mislead
+- **When source has adequate visual** — transpose existing diagrams rather than regenerating
+
+**The workflow**: During structure proposal, identify candidate passages. Propose: "Slide 4 could use a flowchart for the approval process." Get approval, then generate.
+
 ## Mermaid Diagrams
 
 Mermaid renders natively in Marp. Wrap diagrams in a fenced code block with `mermaid` language.

@@ -1,0 +1,6 @@
+# Test dependencies for diagram generation
+matplotlib>=3.7.0
+pytest>=7.0.0
+
+# Note: mermaid-cli (mmdc) must be installed separately via npm:
+#   npm install -g @mermaid-js/mermaid-cli

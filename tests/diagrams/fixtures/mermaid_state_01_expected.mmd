@@ -1,0 +1,16 @@
+stateDiagram-v2
+    [*] --> Created
+    Created --> PendingPayment: submit
+    Created --> Cancelled: cancel
+
+    PendingPayment --> Confirmed: payment_success
+    PendingPayment --> Error: payment_failed
+    PendingPayment --> Cancelled: cancel
+
+    Error --> PendingPayment: retry
+    Error --> Cancelled: cancel
+
+    Confirmed --> Shipped: dispatch
+    Shipped --> Delivered: deliver
+    Delivered --> [*]
+    Cancelled --> [*]

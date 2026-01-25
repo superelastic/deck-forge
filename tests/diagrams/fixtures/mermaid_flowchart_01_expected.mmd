@@ -1,0 +1,6 @@
+flowchart LR
+    A[Submit Form] --> B{Valid Email?}
+    B -->|Yes| C[Create Account]
+    C --> D[Send Confirmation]
+    B -->|No| E[Show Error]
+    E --> A

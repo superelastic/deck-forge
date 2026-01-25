@@ -51,6 +51,15 @@ Before finalizing any deck, work through this checklist. Items marked with a tes
 - [ ] "Why" included, not just "what"
 - [ ] Context assumptions stated — reader may have forgotten
 
+## Diagram Validation
+
+- [ ] **Mermaid syntax valid** — diagrams render without errors
+  - *Test*: Run `python3 tests/diagrams/run_tests.py --validate "CODE"` with your diagram code
+- [ ] **Matplotlib charts generate** — Python scripts produce SVG output
+  - *Test*: Run chart generation script, verify SVG exists in `img/`
+- [ ] **Data values match source** — chart numbers correspond to text claims
+  - *Test*: Cross-reference data points with source material
+
 ## Marp Technical
 
 - [ ] Frontmatter complete: `marp: true`, `theme`, `paginate`

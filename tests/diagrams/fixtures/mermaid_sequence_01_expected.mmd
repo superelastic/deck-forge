@@ -1,0 +1,11 @@
+sequenceDiagram
+    participant U as User/Browser
+    participant A as API Server
+    participant D as Database
+
+    U->>A: Login request (credentials)
+    A->>D: Query user record
+    D-->>A: User data
+    A->>A: Create session token
+    A-->>U: Return token
+    U->>U: Store token, redirect
