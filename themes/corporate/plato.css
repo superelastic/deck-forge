@@ -215,8 +215,26 @@ section::after {
 /* Two-column layout */
 .columns {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 40px;
+  align-items: start;
+}
+
+.columns > div:first-child {
+  text-align: left;
+}
+
+.columns > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.columns > div:last-child img {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
 }
 
 /* Small text variant */

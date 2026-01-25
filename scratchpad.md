@@ -1,6 +1,6 @@
 # Project Scratchpad
 
-Last updated: 2026-01-24
+Last updated: 2026-01-25
 
 ## Currently Working On
 
@@ -57,10 +57,21 @@ For cases where structural validation isn't enough:
 - [x] Created diagram generation test suite (tests/diagrams/) with PASS/FAIL feedback
 - [x] Added visualization heuristics to agent_docs/diagrams-and-charts.md
 - [x] Created 7 test fixtures (4 Mermaid, 3 Matplotlib) based on DiagramGenBenchmark patterns
+- [x] **2026-01-25: Diagram workflow overhaul**
+  - Discovered Mermaid does NOT render natively in Marp (docs were incorrect)
+  - Created `scripts/render-mermaid.sh` to pre-render Mermaid → SVG
+  - Established two-file workflow: `deck.md` (source) → `deck.rendered.md` (for preview/build)
+  - Tested with DriveNets deck (13 diagrams rendered successfully)
+  - Documented `![bg right:50% contain]` syntax for split layouts
+  - Updated themes with improved `.columns` CSS (flexbox right-justify)
+  - Updated `agent_docs/diagrams-and-charts.md` with corrected workflow
+  - Updated `agent_docs/marp-syntax.md` with split layout syntax
 
 ## Before Session End
 
+- [ ] Clean up test deck: `rm -rf drivenets-network-cloud/`
 - [ ] Run `./scripts/archive-session.sh` to save session to .session_logs/
+- [ ] Commit documentation changes
 
 ## Notes
 
@@ -70,3 +81,4 @@ For cases where structural validation isn't enough:
 - Finished decks go to `~/presentations/`, not kept in project
 - Session memory enables deck recreation via re-prompting
 - Diagram tests: `.venv/bin/python tests/diagrams/run_tests.py` (matplotlib installed in .venv)
+- **Mermaid workflow**: Write in deck.md → render-mermaid.sh → preview deck.rendered.md

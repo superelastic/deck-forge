@@ -31,11 +31,32 @@ footer: 'Confidential'
 ## Images
 
 ```markdown
-![bg](image.png)           # Full background
-![bg left](image.png)      # Left half background
-![bg right:40%](image.png) # Right 40% background
-![width:500px](image.png)  # Inline with size
+![bg](image.png)                    # Full background
+![bg left](image.png)               # Left half background
+![bg right:40%](image.png)          # Right 40% background
+![bg right:50% contain](image.png)  # Right half, scaled to fit (recommended for diagrams)
+![width:500px](image.png)           # Inline with size
 ```
+
+## Split Layouts with Images (Recommended for Diagrams)
+
+Use `![bg right:50% contain]` for two-column text+diagram layouts:
+
+```markdown
+## Slide title
+
+![bg right:50% contain](img/diagram.svg)
+
+Text content appears on the left.
+
+- Bullet points
+- More details
+```
+
+**Options:**
+- `right:50%` / `left:50%` — which side, how wide
+- `contain` — scale image to fit without cropping
+- `cover` — scale image to fill (may crop)
 
 ## Multi-column Layout
 

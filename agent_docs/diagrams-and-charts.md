@@ -6,15 +6,70 @@ Visual representations should clarify, not impress. Choose the right tool for ea
 
 | Visualization Type | Tool | Rationale |
 |--------------------|------|-----------|
-| Flowcharts | Mermaid | Native Marp support, no build step, simple syntax |
-| Block diagrams | Mermaid | Boxes and arrows with automatic layout |
-| Sequence diagrams | Mermaid | Clear actor/message notation |
-| State machines | Mermaid | Built-in state diagram support |
+| Flowcharts | Mermaid → SVG | Simple syntax, auto-layout, pre-render to SVG |
+| Block diagrams | Mermaid → SVG | Boxes and arrows with automatic layout |
+| Sequence diagrams | Mermaid → SVG | Clear actor/message notation |
+| State machines | Mermaid → SVG | Built-in state diagram support |
 | X-Y data plots | Matplotlib → SVG | Data-faithful, vector output, agent-friendly |
 | Pie/bar charts | Matplotlib → SVG | Precise control over data representation |
 | Complex architecture | Hand-drawn SVG | When auto-layout fails or custom positioning needed |
 
 **The test**: Is there a simpler tool that would work? Use the lightest tool that accurately represents the content.
+
+## Mermaid Workflow
+
+**IMPORTANT**: Mermaid does NOT render natively in Marp. Diagrams must be pre-rendered to SVG using the Mermaid CLI (`mmdc`), then included as images.
+
+### The Two-File Workflow
+
+1. **`deck.md`** — Source file with inline Mermaid code blocks (for authoring)
+2. **`deck.rendered.md`** — Generated file with SVG image references (for preview/build)
+
+### Step-by-Step
+
+```bash
+# 1. Write deck with inline Mermaid
+vim my-deck/deck.md
+
+# 2. Render Mermaid blocks to SVG
+./scripts/render-mermaid.sh my-deck/deck.md
+
+# 3. Preview the rendered version
+./scripts/build.sh preview my-deck/deck.rendered.md
+
+# 4. Build final output
+./scripts/build.sh pdf my-deck/deck.rendered.md my-deck/output
+```
+
+The `render-mermaid.sh` script:
+- Extracts all ```mermaid code blocks
+- Renders each to `img/diagram-NN.svg`
+- Creates `deck.rendered.md` with image references
+
+### Including Diagrams in Slides
+
+Use Marp's split background syntax for two-column layouts:
+
+```markdown
+## Slide title
+
+![bg right:50% contain](img/diagram-01.svg)
+
+Text content goes here on the left.
+
+- Bullet points
+- More details
+```
+
+**Syntax breakdown:**
+- `bg` — treat as background image
+- `right:50%` — place on right half of slide
+- `contain` — scale to fit without cropping
+
+**Alternatives:**
+- `![bg left:50% contain](img/...)` — image on left, text on right
+- `![bg right:40% contain](img/...)` — narrower image column
+- `![bg contain](img/...)` — full-slide background
 
 ## When to Visualize
 
@@ -42,9 +97,9 @@ Use these heuristics during deck creation to identify text that benefits from vi
 
 **The workflow**: During structure proposal, identify candidate passages. Propose: "Slide 4 could use a flowchart for the approval process." Get approval, then generate.
 
-## Mermaid Diagrams
+## Mermaid Syntax Reference
 
-Mermaid renders natively in Marp. Wrap diagrams in a fenced code block with `mermaid` language.
+Write Mermaid in `deck.md` using fenced code blocks:
 
 ### Flowcharts
 
@@ -103,19 +158,6 @@ stateDiagram-v2
 `` `
 ```
 
-### Block Diagrams
-
-```markdown
-```mermaid
-block-beta
-    columns 3
-    A["Service A"]:1
-    B["Service B"]:1
-    C["Service C"]:1
-    D["Shared Database"]:3
-`` `
-```
-
 ### Styling Mermaid
 
 Add classes to highlight elements:
@@ -132,13 +174,13 @@ flowchart LR
 
 ## Matplotlib Charts (Pre-rendered SVG)
 
-For data plots, generate SVG files using Python and include them as images. This keeps the pipeline simple—only data visualizations need pre-rendering.
+For data plots, generate SVG files using Python and include them as images.
 
 ### Workflow
 
 1. Create a Python script in the deck's `img/` folder
 2. Generate SVG output
-3. Reference the SVG in your slide
+3. Reference the SVG in your slide using `![bg right:50% contain](img/chart.svg)`
 
 ### Example: Line Chart
 
@@ -173,34 +215,6 @@ plt.savefig('growth_chart.svg', format='svg', transparent=True)
 plt.close()
 ```
 
-### Example: Bar Chart
-
-```python
-import matplotlib.pyplot as plt
-import matplotlib
-matplotlib.use('Agg')
-
-categories = ['A', 'B', 'C', 'D']
-values = [23, 45, 56, 78]
-colors = ['#90a4ae', '#90a4ae', '#1976d2', '#90a4ae']  # Highlight C
-
-fig, ax = plt.subplots(figsize=(6, 4))
-bars = ax.bar(categories, values, color=colors)
-
-ax.spines['top'].set_visible(False)
-ax.spines['right'].set_visible(False)
-ax.set_ylabel('Count')
-
-# Add value labels
-for bar, val in zip(bars, values):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-            str(val), ha='center', fontsize=10)
-
-plt.tight_layout()
-plt.savefig('comparison.svg', format='svg', transparent=True)
-plt.close()
-```
-
 ### Slide-Optimized Styling
 
 Charts for slides need different treatment than charts for papers:
@@ -223,22 +237,14 @@ Charts for slides need different treatment than charts for papers:
 
 ## Our growth accelerated in Q2
 
-![width:700px](img/growth_chart.svg)
+![bg right:50% contain](img/growth_chart.svg)
 
 Revenue increased 40% after the platform launch.
 
+- Q1: Baseline period
+- Q2: Post-launch acceleration
+
 ---
-```
-
-### Running Chart Generation
-
-Add chart generation to your deck workflow:
-
-```bash
-cd my-presentation/img
-python generate_charts.py
-cd ..
-./scripts/build.sh preview deck.md
 ```
 
 ## When to Use Each Approach
@@ -246,7 +252,6 @@ cd ..
 ### Use Mermaid when:
 - Showing process flow or relationships
 - Diagram structure matters more than exact positioning
-- You want easy iteration without regenerating files
 - The diagram is part of the explanation, not the data
 
 ### Use Matplotlib when:
@@ -271,18 +276,24 @@ cd ..
 | Tiny labels on charts | Unreadable from distance | Increase font size, simplify |
 | Rainbow color schemes | Distracting, no meaning | Use 1-2 colors with semantic meaning |
 | 3D charts | Distort perception of values | Use 2D—always |
+| Inline Mermaid in Marp | Won't render | Pre-render to SVG with `render-mermaid.sh` |
 
-## Mermaid in Marp: Technical Notes
+## Troubleshooting
 
-Mermaid support requires the Marp CLI with the `--html` flag enabled. The standard build script handles this.
+**Mermaid diagrams showing as code?**
+- Marp doesn't render Mermaid natively
+- Run `./scripts/render-mermaid.sh deck.md` first
+- Preview/build from `deck.rendered.md`, not `deck.md`
 
-If diagrams don't render:
-1. Check that `marp: true` is in frontmatter
-2. Verify code fence uses exactly `mermaid` (lowercase)
-3. Test the diagram at [mermaid.live](https://mermaid.live) first
-4. Check for syntax errors (missing quotes, brackets)
+**Images not showing in preview?**
+- Use `![bg right:50% contain](img/...)` syntax (Marp native)
+- Ensure `theme:` is set in frontmatter (e.g., `theme: plato`)
+- Check image path is relative to markdown file location
 
-Large diagrams may need slide class adjustment:
-```markdown
-<!-- _class: small -->
-```
+**Diagram too large/overlaps footer?**
+- Use `contain` in image syntax to auto-scale
+- Adjust column width: `right:40%` instead of `right:50%`
+
+**Test diagrams locally:**
+- Mermaid: [mermaid.live](https://mermaid.live)
+- Matplotlib: Run script directly, open SVG in browser
