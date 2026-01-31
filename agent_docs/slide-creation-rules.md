@@ -52,3 +52,46 @@ Help the audience see structure between sections:
 What's big is important. What's first is important. What's isolated by white space is important.
 
 Use Marp directives (`_class`, sizing, columns) to create clear hierarchy.
+
+## Content Density and Overflow Prevention
+
+Marp slides have fixed dimensions. Content that exceeds the slide area will overflow into headers/footers or get cut off. **You cannot see the rendered output**, so follow these conservative limits:
+
+### Global Defaults (in frontmatter)
+
+Always include bottom padding and conservative table sizing:
+
+```yaml
+style: |
+  section {
+    padding: 50px 50px 80px 50px;
+  }
+  table {
+    font-size: 0.8em;
+  }
+```
+
+### Table Guidelines
+
+| Table Size | Font Size | Notes |
+|------------|-----------|-------|
+| 1-5 rows | `0.9em` | Default is fine |
+| 6-8 rows | `0.8em` | Use global default |
+| 9-12 rows | `0.75em` | Add scoped style |
+| 13+ rows | Split | Break into multiple slides |
+
+For tables with many columns or long cell content, go one size smaller.
+
+### Content Limits Per Slide
+
+- **Max ~8 lines of body text** (excluding title)
+- **Max 5-6 bullet points** (prefer fewer)
+- **Tables + text**: reduce one or the other
+- **Code blocks**: max ~10-12 lines
+
+### When in Doubt
+
+1. Use smaller font sizes preemptively
+2. Split content across slides (slides are cheap)
+3. Move detail to appendix slides
+4. After build, user flags overflow → fix reactively
