@@ -90,13 +90,13 @@ while IFS= read -r line; do
 
         # Render to SVG
         SVG_FILE="$IMG_DIR/diagram-$(printf '%02d' $DIAGRAM_NUM).svg"
-        echo -e "  Rendering diagram $DIAGRAM_NUM..."
+        echo -e "  Rendering diagram $DIAGRAM_NUM..." >&2
 
-        if mmdc -i "$TEMP_MMD" -o "$SVG_FILE" -b transparent 2>/dev/null; then
+        if mmdc -i "$TEMP_MMD" -o "$SVG_FILE" -t neutral -b white 2>&1 >/dev/null; then
             # Output image reference instead of mermaid block
             echo "![Diagram $DIAGRAM_NUM](img/$(basename "$SVG_FILE"))"
         else
-            echo -e "${RED}  Failed to render diagram $DIAGRAM_NUM${NC}"
+            echo -e "${RED}  Failed to render diagram $DIAGRAM_NUM${NC}" >&2
             echo '```mermaid'
             echo "$MERMAID_CONTENT"
             echo '```'

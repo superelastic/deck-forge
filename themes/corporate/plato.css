@@ -29,8 +29,9 @@ section {
   font-weight: 400;
   color: var(--color-fg);
   background-color: var(--color-bg);
-  padding: 40px 60px 80px 60px;  /* Extra bottom padding to clear page numbers */
+  padding: 40px 60px 100px 60px;  /* Extra bottom padding to clear page numbers */
   line-height: 1.5;
+  overflow: hidden;  /* Prevent content overflow */
 }
 
 /* Headers */
@@ -134,22 +135,38 @@ code {
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.9em;
+  color: var(--color-fg);
 }
 
 pre {
-  background-color: #1f2937;
-  color: #f9fafb;
+  background-color: #f8fafc;
+  color: #334155;
   padding: 20px;
   border-radius: 8px;
+  border: 1px solid #e2e8f0;
   overflow-x: auto;
-  font-size: 20px;
+  font-size: 18px;
+  max-height: 380px;
 }
 
 pre code {
   background-color: transparent;
   padding: 0;
-  color: inherit;
+  color: #334155;
 }
+
+/* Syntax highlighting overrides for light theme */
+pre .hljs-keyword,
+pre .hljs-selector-tag,
+pre .hljs-built_in { color: #7c3aed; }
+pre .hljs-string,
+pre .hljs-attr { color: #059669; }
+pre .hljs-number { color: #d97706; }
+pre .hljs-comment { color: #94a3b8; }
+pre .hljs-variable,
+pre .hljs-template-variable { color: #dc2626; }
+pre .hljs-type,
+pre .hljs-name { color: #2563eb; }
 
 /* Tables */
 table {
@@ -245,6 +262,72 @@ section.small {
 section.small h1 {
   font-size: 36px;
 }
+
+/* Dense layouts - for slides with overflow issues
+   dense-1: mild (90% scale)
+   dense-2: medium (75% scale)
+   dense-3: aggressive (65% scale)
+*/
+
+/* Dense-1: Mild compression */
+section.dense-1 {
+  font-size: 25px;
+  line-height: 1.4;
+}
+section.dense-1 h1 { font-size: 40px; margin-bottom: 20px; }
+section.dense-1 h2 { font-size: 32px; margin-bottom: 16px; }
+section.dense-1 h3 { font-size: 27px; margin-bottom: 14px; }
+section.dense-1 li { margin-bottom: 0.4em; padding: 3px 7px; }
+section.dense-1 pre { font-size: 16px; padding: 16px; max-height: 340px; }
+section.dense-1 table { font-size: 21px; margin: 16px 0; }
+section.dense-1 th, section.dense-1 td { padding: 10px 14px; }
+section.dense-1 blockquote { margin: 20px 0; padding-left: 20px; }
+section.dense-1 img, section.dense-1 svg { max-height: 400px; width: auto; }
+
+/* Dense-2: Medium compression */
+section.dense-2 {
+  font-size: 21px;
+  line-height: 1.35;
+}
+section.dense-2 h1 { font-size: 34px; margin-bottom: 16px; }
+section.dense-2 h2 { font-size: 28px; margin-bottom: 12px; }
+section.dense-2 h3 { font-size: 24px; margin-bottom: 10px; }
+section.dense-2 li { margin-bottom: 0.3em; padding: 2px 6px; }
+section.dense-2 pre { font-size: 14px; padding: 12px; max-height: 300px; }
+section.dense-2 table { font-size: 18px; margin: 12px 0; }
+section.dense-2 th, section.dense-2 td { padding: 8px 12px; }
+section.dense-2 blockquote { margin: 16px 0; padding-left: 16px; }
+section.dense-2 img, section.dense-2 svg { max-height: 340px; width: auto; }
+
+/* Dense-3: Aggressive compression */
+section.dense-3 {
+  font-size: 18px;
+  line-height: 1.3;
+}
+section.dense-3 h1 { font-size: 28px; margin-bottom: 12px; }
+section.dense-3 h2 { font-size: 24px; margin-bottom: 10px; }
+section.dense-3 h3 { font-size: 20px; margin-bottom: 8px; }
+section.dense-3 li { margin-bottom: 0.25em; padding: 1px 5px; }
+section.dense-3 pre { font-size: 12px; padding: 10px; max-height: 260px; }
+section.dense-3 table { font-size: 15px; margin: 10px 0; }
+section.dense-3 th, section.dense-3 td { padding: 6px 10px; }
+section.dense-3 blockquote { margin: 12px 0; padding-left: 14px; }
+section.dense-3 img, section.dense-3 svg { max-height: 280px; width: auto; }
+
+/* Legacy alias - dense = dense-2 */
+section.dense {
+  font-size: 21px;
+  line-height: 1.35;
+}
+section.dense h1 { font-size: 34px; margin-bottom: 16px; }
+section.dense h2 { font-size: 28px; margin-bottom: 12px; }
+section.dense h3 { font-size: 24px; margin-bottom: 10px; }
+section.dense li { margin-bottom: 0.3em; padding: 2px 6px; }
+section.dense pre { font-size: 14px; padding: 12px; max-height: 300px; }
+section.dense table { font-size: 18px; margin: 12px 0; }
+section.dense th, section.dense td { padding: 8px 12px; }
+section.dense blockquote { margin: 16px 0; padding-left: 16px; }
+section.dense img, section.dense svg { max-height: 340px; width: auto; }
 
 /* Large text variant */
 section.large {

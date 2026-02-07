@@ -86,12 +86,7 @@ deck-forge/
     output/          # Build outputs
 ```
 
-**After delivery**, move finished decks to `~/presentations/`:
-```bash
-mv my-presentation ~/presentations/
-```
-
-This keeps Deck Forge clean as a tool. Session memory captures prompts, so any deck can be recreated by re-prompting with the original source material.
+**At session end**, decks are automatically moved to `~/presentations/` by the SessionEnd hook. This keeps Deck Forge clean as a tool. Session memory captures prompts, so any deck can be recreated by re-prompting with the original source material.
 
 ## Collaboration Mode
 
@@ -102,8 +97,25 @@ This keeps Deck Forge clean as a tool. Session memory captures prompts, so any d
 
 ## Session Memory
 
-This project uses session memory for continuity between conversations.
+This project uses the **session-memory** plugin for continuity between Claude Code sessions. All memory is git-versioned and travels with the repo.
 
-- **At session start**: Read `.claude/STARTUP_PROTOCOL.md` for context from previous sessions
-- **At session end**: Run `./scripts/archive-session.sh` to save the session
-- **Search past work**: `rg -l "term" .session_logs/`
+### How It Works
+
+- **Automatic**: Hooks archive sessions on end and restore context on start
+- **Pending queue**: Sessions captured immediately, summarized intelligently at next start
+- **Searchable**: Past work is searchable via MCP tools or keyword search
+
+### Key Directories
+
+- `sessions/` — AI-generated session summaries
+- `docs/investigations/` — Hypothesis-driven research records
+- `docs/decisions/` — Architecture Decision Records
+- `docs/reference/` — Methodologies and quick references
+- `.session_logs/` — Raw session archives
+- `scratchpad.md` — Current work tracking and TODOs
+
+### Commands
+
+- `/session-memory:startup` — Manually load context from previous sessions
+- `/session-memory:session-end` — Manually archive and summarize current session
+- `/session-memory:search <query>` — Search past sessions and documentation
